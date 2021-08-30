@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
@@ -10,7 +11,7 @@ import Button from '../components/Button';
 
 import { useAppContext } from '../context/auth';
 
-export default function Home() {
+export default function Home() : JSX.Element {
   const { user, signInWithGoogle } = useAppContext();
 
   async function handleLoginWithGoogle() {

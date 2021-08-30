@@ -1,9 +1,10 @@
+import React from 'react';
 import firebase from 'firebase';
 import {
   createContext,
   useContext,
   useState
-} from 'react'
+} from 'react';
 import { auth } from '../services/firebase';
 
 type ChildrenProps = {
@@ -13,7 +14,7 @@ type ChildrenProps = {
 type User = {
   id: string;
   name: string;
-  // email: string;
+  email: string | null;
   avatar: string;
 }
 
@@ -24,10 +25,10 @@ type AuthContextType = {
 
 const AuthContext = createContext({} as AuthContextType);
 
-export function AppWrapper({ children }: ChildrenProps) {
+export function AppWrapper({ children }: ChildrenProps) : JSX.Element {
   const [user, setUser] = useState<User>();
 
-  async function signInWithGoogle() {
+  async function signInWithGoogle() : Promise<void> {
     const provider = new firebase.auth.GoogleAuthProvider();
     const result = await auth.signInWithPopup(provider);
       //TODO: Save in database
@@ -41,7 +42,7 @@ export function AppWrapper({ children }: ChildrenProps) {
       setUser({
         id: uid,
         name: displayName,
-        // email: email,
+        email: email,
         avatar: photoURL
       });
     }
@@ -54,6 +55,6 @@ export function AppWrapper({ children }: ChildrenProps) {
   );
 }
 
-export function useAppContext() {
+export function useAppContext() : AuthContextType {
   return useContext(AuthContext);
 }

@@ -2,16 +2,12 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "node": true,
-        "jest": true
+        "node": true
     },
     "extends": [
+        "eslint:recommended",
         "plugin:react/recommended",
-        "standard",
-        "plugin:@typescript-eslint/recommended",
-        "prettier/@typescript-eslint",
-        "prettier/standard",
-        "prettier/react"
+        "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -23,12 +19,8 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint",
-        "prettier"
+        "@typescript-eslint"
     ],
     "rules": {
-        "prettier/prettier": "error",
-        "space-before-function-paren": "off",
-        "react/prop-types": "off"
     }
 }
