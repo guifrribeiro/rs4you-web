@@ -1,15 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Router from 'next/router';
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.scss'
+import styles from '../../styles/Home.module.scss'
 
-import illustrationImg from '../assets/images/illustration.svg'
+import illustrationImg from '../../assets/images/illustration.svg'
+import logoImg from '../../assets/images/logo.svg'
+import googleIconImg from '../../assets/images/google-icon.svg'
 
-export default function Home() : JSX.Element {
-  useEffect(() => {
-    Router.push('/auth/login');
-  })
+import Button from '../../components/Button';
+
+import { useAppContext } from '../../context/auth';
+
+export default function Login() : JSX.Element {
+  const { user, signInWithGoogle } = useAppContext();
+
+  async function handleLoginWithGoogle() {
+    if(!user) {
+      await signInWithGoogle();
+    }
+    Router.push('/');
+  }
 
   return (
     <div className={styles.page}>
@@ -23,7 +34,7 @@ export default function Home() : JSX.Element {
         <strong>Cria salas de Q&amp;A ao-vivo</strong>
         <p>Tire as dúvidas da sua audiência em tempo-real</p>
       </aside>
-      {/* <main>
+      <main>
         <div className={styles.mainContent}>
           <Image src={logoImg} alt="R$4You" />
           <button onClick={handleLoginWithGoogle} className={styles.createRoom}>
@@ -43,7 +54,7 @@ export default function Home() : JSX.Element {
             </Button>
           </form>
         </div>
-      </main> */}
+      </main>
     </div>
   )
 }
