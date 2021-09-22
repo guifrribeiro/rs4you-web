@@ -1,12 +1,13 @@
 import React from 'react';
 import Router from 'next/router';
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../../styles/Home.module.scss'
+import Head from 'next/head';
+import Image from 'next/image';
+import { store } from 'react-notifications-component';
+import styles from '../../styles/auth/Login.module.scss';
 
-import illustrationImg from '../../assets/images/illustration.svg'
-import logoImg from '../../assets/images/logo.svg'
-import googleIconImg from '../../assets/images/google-icon.svg'
+import illustrationImg from '../../assets/images/illustration.svg';
+import logoImg from '../../assets/images/logo.svg';
+import googleIconImg from '../../assets/images/google-icon.svg';
 
 import Button from '../../components/Button';
 
@@ -15,11 +16,32 @@ import { useAppContext } from '../../context/auth';
 export default function Login() : JSX.Element {
   const { user, signInWithGoogle } = useAppContext();
 
+  async function handleRegisterEmail() {
+    Router.push('/auth/register');
+  }
+
   async function handleLoginWithGoogle() {
     if(!user) {
-      await signInWithGoogle();
+      await signInWithGoogle().then(() => {
+        Router.push('/');
+      }).catch(() => {
+        store.addNotification({
+          title: "Não foi possível efetuar o login!",
+          message: "Verifique suas credenciais Google.",
+          type: "danger",
+          insert: "top",
+          container: "top-right",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true
+          }
+        });
+      });
+    } else {
+      Router.push('/');
     }
-    Router.push('/');
   }
 
   return (
@@ -30,7 +52,9 @@ export default function Login() : JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <aside>
-        <Image src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
+        <div className={styles.illustrationImg}>
+          <Image src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
+        </div>
         <strong>Cria salas de Q&amp;A ao-vivo</strong>
         <p>Tire as dúvidas da sua audiência em tempo-real</p>
       </aside>
@@ -41,18 +65,12 @@ export default function Login() : JSX.Element {
             <div className={styles.logoGoogle}>
               <Image src={googleIconImg} alt="Logo do Google" />
             </div>
-            Crie sua sala com o Google
+            Registre-se com o Google
           </button>
-          <div className={styles.separator}>ou entre em uma sala</div>
-          <form>
-            <input
-              type="text"
-              placeholder="Digite o código da sala"
-            />
-            <Button type="submit">
-              Entrar na sala
-            </Button>
-          </form>
+          <Button onClick={handleRegisterEmail} type="submit">
+            Registre-se com seu Email
+          </Button>
+          <div className={styles.separator}>Já é registrado? Faça login</div>
         </div>
       </main>
     </div>
