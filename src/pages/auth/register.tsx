@@ -32,7 +32,6 @@ export default function Register() : JSX.Element {
             <input id="name" type="text" autoComplete="name" required />
             <label htmlFor="email">Email</label>
             <input id="email" type="email" required />
-            <input id="email" type="email" required />
             <Button type="submit">Confirmar</Button>
           </form>
         </div>
