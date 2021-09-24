@@ -60,7 +60,6 @@ export default function Auth() : JSX.Element {
       </aside>
       <main>
         <div className={styles.mainContent}>
-          {/* <Image src={logoImg} alt="R$4You" /> */}
           <div className={styles.buttons}>
             <button onClick={handleLoginWithGoogle} className={styles.buttonGoogle}>
               <div className={styles.logoGoogle}>
