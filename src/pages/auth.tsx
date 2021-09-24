@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { store } from 'react-notifications-component';
 import styles from '../styles/Auth.module.scss';
 
-import illustrationImg from '../assets/images/illustration.svg';
+import illustrationImg from '../assets/images/undraw_projections.svg';
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
 
@@ -17,7 +17,7 @@ export default function Auth() : JSX.Element {
   const { user, signInWithGoogle } = useAppContext();
 
   async function handleRegisterEmail() {
-    Router.push('/auth/register');
+    // Router.push('/auth/register');
   }
 
   async function handleLoginWithGoogle() {
@@ -52,24 +52,26 @@ export default function Auth() : JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <aside>
+        <strong>Está na hora de melhorar sua vida financeira</strong>
         <div className={styles.illustrationImg}>
           <Image src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
         </div>
-        <strong>Cria salas de Q&amp;A ao-vivo</strong>
-        <p>Tire as dúvidas da sua audiência em tempo-real</p>
+        <p>Deixe que os $ons te ajudem a cuidar melhor do seu dinheiro, com suas projeções em tempo real.</p>
       </aside>
       <main>
         <div className={styles.mainContent}>
-          <Image src={logoImg} alt="R$4You" />
-          <button onClick={handleLoginWithGoogle} className={styles.createRoom}>
-            <div className={styles.logoGoogle}>
-              <Image src={googleIconImg} alt="Logo do Google" />
-            </div>
-            Registre-se com o Google
-          </button>
-          <Button onClick={handleRegisterEmail} type="submit">
-            Registre-se com seu Email
-          </Button>
+          {/* <Image src={logoImg} alt="R$4You" /> */}
+          <div className={styles.buttons}>
+            <button onClick={handleLoginWithGoogle} className={styles.buttonGoogle}>
+              <div className={styles.logoGoogle}>
+                <Image src={googleIconImg} alt="Logo do Google" />
+              </div>
+              Google
+            </button>
+            <Button onClick={handleRegisterEmail} type="submit">
+              Registre-se com seu Email
+            </Button>
+          </div>
           <div className={styles.separator}>Já é registrado? Faça login</div>
         </div>
       </main>
