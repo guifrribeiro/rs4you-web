@@ -8,7 +8,7 @@ import illustrationImg from '../assets/images/illustration.svg'
 
 export default function Home() : JSX.Element {
   useEffect(() => {
-    Router.push('/auth/login');
+    Router.push('/auth');
   })
 
   return (

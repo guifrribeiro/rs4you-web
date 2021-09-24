@@ -3,17 +3,17 @@ import Router from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import { store } from 'react-notifications-component';
-import styles from '../../styles/auth/Login.module.scss';
+import styles from '../styles/Auth.module.scss';
 
-import illustrationImg from '../../assets/images/illustration.svg';
-import logoImg from '../../assets/images/logo.svg';
-import googleIconImg from '../../assets/images/google-icon.svg';
+import illustrationImg from '../assets/images/illustration.svg';
+import logoImg from '../assets/images/logo.svg';
+import googleIconImg from '../assets/images/google-icon.svg';
 
-import Button from '../../components/Button';
+import Button from '../components/Button';
 
-import { useAppContext } from '../../context/auth';
+import { useAppContext } from '../context/auth';
 
-export default function Login() : JSX.Element {
+export default function Auth() : JSX.Element {
   const { user, signInWithGoogle } = useAppContext();
 
   async function handleRegisterEmail() {
